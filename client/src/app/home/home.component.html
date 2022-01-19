@@ -1,18 +1,27 @@
-<mat-toolbar>
-  <button mat-icon-button class="icon" aria-label="menu">
-    <mat-icon>home</mat-icon>
-  </button>
-  <span>RxJs Fun! :) (angular 12, material design and ngrx)</span>
-  <span class="spacer"></span>
-</mat-toolbar>
-<mat-tab-group mat-stretch-tabs class="stretched-tabs mat-elevation-z4">
-  <mat-tab label="Basics">
-    <app-basics></app-basics>
-  </mat-tab>
-  <mat-tab label="Advanced" disabled>
-  </mat-tab>
-  <mat-tab label="Pro" disabled>
-  </mat-tab>
-  <mat-tab label="Guru" disabled>
-  </mat-tab>
-</mat-tab-group>
+<div fxLayout="row wrap">
+  <mat-toolbar color="primary" class="mat-elevation-z8 toolbar">
+    <mat-toolbar-row>
+      <button mat-icon-button class="icon" aria-label="menu" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span>RxJs Fun! :) (angular 12, material design and ngrx)</span>
+      <span class="spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-drawer-container class="container" autosize>
+    <mat-drawer #drawer mode="side" opened class="drawer">
+      <mat-nav-list>
+        <mat-list-item *ngFor="let tab of $tabs | async" [disabled]="tab.disabled" (click)="onNavigate(tab)">
+          <div mat-line>{{ tab.label }}</div>
+          <button mat-icon-button>
+            <mat-icon color="accent">{{tab.icon}}</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

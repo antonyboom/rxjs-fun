@@ -8,22 +8,26 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import {HomeComponent} from './home/home.component';
 import {MatListModule} from '@angular/material/list';
 import {BasicsComponent} from './home/steps/basics/basics.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
-import {PlaygroundComponent} from './home/steps/basics/playground/playground.component';
-import {MatGridListModule} from '@angular/material/grid-list';
 import {FlexModule} from '@angular/flex-layout';
+import {AdvancedComponent} from './home/steps/advanced/advanced.component';
+import {PlaygroundComponent} from './shared/components/playground/playground.component';
+import {OperatorsComponent} from './shared/components/operators/operators.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     BasicsComponent,
-    PlaygroundComponent
+    PlaygroundComponent,
+    AdvancedComponent,
+    OperatorsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,10 +40,14 @@ import {FlexModule} from '@angular/flex-layout';
     MatListModule,
     MatExpansionModule,
     MatCardModule,
-    MatGridListModule,
+    MatSidenavModule,
 
     BrowserAnimationsModule,
     FlexModule
+  ],
+  exports: [
+    OperatorsComponent,
+    PlaygroundComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

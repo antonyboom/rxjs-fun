@@ -1,13 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {MocksService} from '../../../services/mocks.service';
+import {Observable, of, Operator} from 'rxjs';
 import {startWith} from 'rxjs/operators';
-
-interface Operator {
-  name: string;
-  description: string;
-  snippet: string[]
-}
+import {BasicService} from 'src/app/services/basic.service';
+import {RxjsOperator} from 'src/app/shared/interfaces/operator';
 
 @Component({
   selector: 'app-basics',
@@ -17,37 +12,30 @@ interface Operator {
 
 export class BasicsComponent implements OnInit {
 
-  operators: Operator[] = [
-    {
-      name: 'filter()',
-      description: 'callback function exists to filter stream value by condition',
-      snippet:
-        [
-          'observable().pipe(filter(data => !data)), will return data not equal null or undefined',
-          'observable().pipe(filter(data => data.some(item => item.name === Kaveri))), will return only objects where name Kaveri'
-        ]
-    },
-    {
-      name: 'map()',
-      description: 'callback function exists to update/modify stream value or return different one',
-      snippet: [
-        'observable().pipe(map((response: any) => do anything with data to return desire value))',
-        'observable().pipe(map(object: amy{} => { object.name = Anton; return object)), will update property name inside of object to Anton'
-      ]
-    },
-  ]
+  /* for operators tab */
+  public $title: Observable<string>;
+  public $desc: Observable<string[]>;
+  public $operators: Observable<RxjsOperator[]>;
 
-  $task: Observable<any>
-  $creative: Observable<any>
-
+  /* for playground */
+  public $notes: Observable<string[]>;
+  public $task: Observable<string>;
+  public $creative: Observable<string>;
   constructor(
-    service: MocksService
+    private bs: BasicService
   ) {
-    this.$creative = service.mock();
-    this.$task = service.mock();
+    this.$title = this.bs.getTitle();
+    this.$desc = this.bs.getDescription();
+    this.$operators = this.bs.getOperators();
+    this.$notes = this.bs.getNotes();
+    /* training task */
+    this.$task = this.bs.getMock();
+    /* creative playground */
+    this.$creative = this.bs.getMock();
   }
 
   ngOnInit(): void {
+
   }
 
 }

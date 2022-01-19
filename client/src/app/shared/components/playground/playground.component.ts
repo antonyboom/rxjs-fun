@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PlaygroundComponent implements OnInit {
 
+  @Input() notes: any
   @Input() task: { key: string; value: string }[];
   @Input() creative: any
 

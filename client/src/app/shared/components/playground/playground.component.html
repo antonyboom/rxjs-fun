@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-title>
+    Playground
+  </mat-card-title>
+  <mat-card-content>
+    <section>
+      <p>
+        Below you can see 2 cards (creative and task). You need to:
+      </p>
+    </section>
+    <mat-list>
+      <mat-list-item *ngFor="let note of notes">
+        <p>{{note}}</p>
+      </mat-list-item>
+    </mat-list>
+    <section>
+      <div fxLayout="row">
+        <mat-card fxFlex="100">
+          <mat-card-subtitle>
+            1. Task
+          </mat-card-subtitle>
+          <mat-card-content>
+            remove open and close tags "pre ngNonBindable" when you are ready (playground component, line 24, 28)
+            <pre ngNonBindable>
+              <ng-container *ngFor="let item of task; let i = index">
+                # {{i}} : {{item.key}} => {{item.value}}
+              </ng-container>
+            </pre>
+          </mat-card-content>
+        </mat-card>
+        <mat-card fxFlex="100">
+          <mat-card-subtitle>
+            2. Creative
+          </mat-card-subtitle>
+          <mat-card-content>
+            {{creative}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </section>
+  </mat-card-content>
+</mat-card>

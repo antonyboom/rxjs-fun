@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-title>
+    {{title}}
+  </mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let item of description">
+        {{item}}
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<mat-accordion class="headers-align" multi>
+  <ng-container *ngFor="let item of list">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{item.name}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{item.description}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-card-content>
+          <ng-container *ngFor="let code of item.snippet, let i = index">
+            <p> #{{i}} - {{code}}</p>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+  </ng-container>
+</mat-accordion>
+

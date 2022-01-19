@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-card-title>
+    Concept
+  </mat-card-title>
+  <mat-card-content>
+    <p>
+      Operators rxjs used to work with value from observables source. <br>
+      Good example of such streams are angular http response and ngrx (redux) adaptation for angular <br>
+      The most useful operators to manipulate data from source are filter() and map(),
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-accordion class="headers-align">
+  <ng-container *ngFor="let operator of operators">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{operator.name}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{operator.description}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-card-content>
+          <ng-container *ngFor="let code of operator.snippet, let i = index">
+            <p> #{{i}} - {{code}}</p>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+  </ng-container>
+</mat-accordion>
+
+<app-playground
+  [task]="$task | async"
+  [creative]="$creative | async">
+</app-playground>

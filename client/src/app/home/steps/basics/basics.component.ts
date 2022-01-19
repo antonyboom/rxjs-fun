@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {MocksService} from '../../../services/mocks.service';
+import {startWith} from 'rxjs/operators';
 
 interface Operator {
   name: string;
@@ -36,7 +37,7 @@ export class BasicsComponent implements OnInit {
     },
   ]
 
-  $task: Observable<{key: string; value: string} | any>
+  $task: Observable<any>
   $creative: Observable<any>
 
   constructor(

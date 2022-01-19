@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import { Router } from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {delay, map} from 'rxjs/operators';
 import { Tab } from '../shared/interfaces/tab';
@@ -19,7 +20,7 @@ export class MocksService {
     {
       link: '/advanced',
       label: 'Advanced',
-      disabled: true,
+      disabled: false,
       icon: 'star_outline'
     },
     {
@@ -36,7 +37,9 @@ export class MocksService {
     },
   ]
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
   }
 
   getTabs(): Observable<Tab[]> {
@@ -44,4 +47,7 @@ export class MocksService {
       delay(500))
   }
 
+  onNavigate(tab: Tab) {
+    void this.router.navigate(['home/' + tab.link])
+  }
 }

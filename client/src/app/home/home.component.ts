@@ -26,6 +26,6 @@ export class HomeComponent implements OnInit {
   }
 
   onNavigate(tab: Tab) {
-    void this.router.navigate(['home/' + tab.link])
+    this.mock.onNavigate(tab)
   }
 }

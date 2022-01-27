@@ -18,7 +18,7 @@ export class BasicsComponent implements OnInit {
 
   /* for playground */
   public $notes: Observable<string[]>;
-  public $task: Observable<string | { key: string, value: string }[]>;
+  public $task: Observable<{ key: string, value: string }[]>;
   public $playground: Observable<string>;
 
   constructor(

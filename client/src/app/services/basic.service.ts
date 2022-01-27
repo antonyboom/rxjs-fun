@@ -1,12 +1,7 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, combineLatest, Observable, of, ReplaySubject, Subject} from 'rxjs';
+import {Observable, of, ReplaySubject, Subject} from 'rxjs';
 import {delay, filter, map, switchMap} from 'rxjs/operators';
 import {RxjsOperator} from '../shared/interfaces/operator';
-
-const data: string = '\n' +
-  'Are own design entire former get should. Advantages boisterous day excellence boy filter(). Out between our two waiting wishing. Pursuit he he garrets greater towards amiable so placing. Nothing off how norland delight. Abode shy shade she hours forth its use. Up whole of fancy ye quiet do. Justice fortune no to is if winding morning forming.\n' +
-  '\n' +
-  'Finished her are its honoured drawings nor. Pretty see mutual thrown all not edward ten. Particular an boisterous up he reasonably frequently map(). Several any had enjoyed shewing studied two. Up intention remainder sportsmen behaviour ye happiness. Few again any alone style added abode ask. Nay projecting unpleasing boisterous eat discovered solicitude. Own six moments produce elderly pasture far arrival. Hold our year they ten upon. Gentleman contained so intention sweetness in on resolving.';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +42,24 @@ export class BasicService {
     'and value some random description form you :)',
     '- Creative Card: just play around with response and be creative :)'
   ];
+  private data: { key: string, value: string }[] = [
+    {
+      key: 'filter()',
+      value: 'enabled filter option returns this array',
+    },
+    {
+      key: 'loop()',
+      value: 'non filtered data returns only mess',
+    },
+    {
+      key: 'map()',
+      value: 'disabled filter option returns that array',
+    },
+    {
+      key: 'heck()',
+      value: 'ui is fun they told me',
+    },
+  ];
 
   private subjectData$: Subject<{ isFiltered: boolean, isMapped: boolean }> =
     new ReplaySubject<{ isFiltered: boolean, isMapped: boolean }>();
@@ -63,36 +76,36 @@ export class BasicService {
   constructor() {
   }
 
-  getMock(): Observable<string> {
-    return of(data).pipe(
+  getMock(): Observable<any> {
+    return of(this.data).pipe(
       delay(100));
   }
 
   mockPlayground(isFiltered: boolean, isMapped: boolean): Observable<any> {
-    return of(data).pipe(
-      filter((response: string) => {
-        console.log(isFiltered ? response.includes('()') : false);
-        return isFiltered ? response.includes('()') : true;
-      }),
+    return of(this.data).pipe(
       map(response => {
         switch (true) {
           case isFiltered && isMapped:
             return [
               {
                 name: 'filter()',
-                desc: 'filtler works based on condition'
+                desc: 'filter works based on condition'
               },
               {
                 name: 'map()',
-                desc: 'changed string to this array of objects'
+                desc: 'pay attention how object properties has been mapped'
               }
             ];
           case !isFiltered && isMapped:
             return 'ooops seems you did not enable filter()';
-          case !isFiltered && !isMapped:
-            return '';
+          case isFiltered && !isMapped:
+            return response;
+          default:
+            return 'non filtered data returns only mes';
         }
-        return isMapped ? response : response;
+      }),
+      filter((response) => {
+        return isFiltered ? response instanceof Array : typeof response === 'string';
       }),
       delay(1000));
   }

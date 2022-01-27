@@ -33,7 +33,18 @@
             2. Creative
           </mat-card-subtitle>
           <mat-card-content>
-            {{creative}}
+            <ng-container *ngFor="let op of operators; let i = index">
+              <mat-form-field appearance="fill">
+                <mat-label>{{op.name}}</mat-label>
+                <mat-select [(value)]="op.enabled" (valueChange)="onSelectionChange(op, $event)">
+                  <mat-option [value]="true">Enable</mat-option>
+                  <mat-option [value]="false">Disable</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+            <section>
+              <pre class="content">{{creative | json}}</pre>
+            </section>
           </mat-card-content>
         </mat-card>
       </div>

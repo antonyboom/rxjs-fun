@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable, of, Operator} from 'rxjs';
-import {startWith} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 import {BasicService} from 'src/app/services/basic.service';
 import {RxjsOperator} from 'src/app/shared/interfaces/operator';
 
@@ -19,8 +18,9 @@ export class BasicsComponent implements OnInit {
 
   /* for playground */
   public $notes: Observable<string[]>;
-  public $task: Observable<string>;
-  public $creative: Observable<string>;
+  public $task: Observable<string | { key: string, value: string }[]>;
+  public $playground: Observable<string>;
+
   constructor(
     private bs: BasicService
   ) {
@@ -28,14 +28,21 @@ export class BasicsComponent implements OnInit {
     this.$desc = this.bs.getDescription();
     this.$operators = this.bs.getOperators();
     this.$notes = this.bs.getNotes();
-    /* training task */
+    /*
+    * training task
+    *  apply pipe here to get final results
+    *  */
     this.$task = this.bs.getMock();
-    /* creative playground */
-    this.$creative = this.bs.getMock();
+    /* creative playground just for example purposes */
+    this.$playground = this.bs.playgroundData$;
   }
 
   ngOnInit(): void {
+    this.bs.getPlayground({isFiltered: false, isMapped: false});
+  }
 
+  onDropdownChange(event: { isFiltered: boolean, isMapped: boolean }) {
+    this.bs.updatePlayground(event);
   }
 
 }

@@ -1,7 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, of} from 'rxjs';
-import {delay} from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 import {MocksService} from '../services/mocks.service';
 import {Tab} from '../shared/interfaces/tab';
 
@@ -26,6 +25,6 @@ export class HomeComponent implements OnInit {
   }
 
   onNavigate(tab: Tab) {
-    this.mock.onNavigate(tab)
+    this.mock.onNavigate(tab);
   }
 }

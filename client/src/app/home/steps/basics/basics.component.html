@@ -8,8 +8,11 @@
   </mat-tab>
   <mat-tab label="Playground">
     <app-playground
+      (optionSelected)="onDropdownChange($event)"
+
       [task]="$task | async"
-      [creative]="$creative | async"
+      [creative]="$playground | async"
+      [operators]="$operators | async"
       [notes]="$notes | async">
     </app-playground>
   </mat-tab>

@@ -9,6 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSelectModule} from '@angular/material/select';
 
 import {HomeComponent} from './home/home.component';
 import {MatListModule} from '@angular/material/list';
@@ -31,6 +32,8 @@ import {OperatorsComponent} from './shared/components/operators/operators.compon
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+
     AppRoutingModule,
     /* material */
     MatToolbarModule,
@@ -41,8 +44,8 @@ import {OperatorsComponent} from './shared/components/operators/operators.compon
     MatExpansionModule,
     MatCardModule,
     MatSidenavModule,
-
-    BrowserAnimationsModule,
+    MatSelectModule,
+    /* Flex */
     FlexModule
   ],
   exports: [

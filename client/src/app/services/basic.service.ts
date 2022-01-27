@@ -42,22 +42,22 @@ export class BasicService {
     'and value some random description form you :)',
     '- Creative Card: just play around with response and be creative :)'
   ];
-  private data: { key: string, value: string }[] = [
+  private data: any[] = [
     {
-      key: 'filter()',
-      value: 'enabled filter option returns this array',
+      apiRandomName: 'filter()',
+      someText: 'filter works based on condition',
     },
     {
-      key: 'loop()',
-      value: 'non filtered data returns only mess',
+      apiRandomName: 'loop()',
+      someText: 'we are lucky it is not a nested array',
     },
     {
-      key: 'map()',
-      value: 'disabled filter option returns that array',
+      apiRandomName: 'map()',
+      someText: 'map can change your response data to match your template',
     },
     {
-      key: 'heck()',
-      value: 'ui is fun they told me',
+      apiRandomName: 'heck()',
+      someText: 'ui is fun they told me',
     },
   ];
 
@@ -88,20 +88,20 @@ export class BasicService {
           case isFiltered && isMapped:
             return [
               {
-                name: 'filter()',
-                desc: 'filter works based on condition'
+                key: 'filter()',
+                value: 'filter works based on condition'
               },
               {
-                name: 'map()',
-                desc: 'pay attention how object properties has been mapped'
+                key: 'map()',
+                value: 'pay attention how object properties has been mapped'
               }
             ];
           case !isFiltered && isMapped:
             return 'ooops seems you did not enable filter()';
           case isFiltered && !isMapped:
-            return response;
+            return response.filter(item => item.apiRandomName === 'filter()' || item.apiRandomName === 'map()');
           default:
-            return 'non filtered data returns only mes';
+            return 'non filtered data returns only some random string like this :)';
         }
       }),
       filter((response) => {
